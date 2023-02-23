@@ -10,6 +10,7 @@ const destinationSchema = new Schema({
   },
   arrival: {
     type: Date,
+    required: true
   }
 }, {
   timestamps: true
@@ -18,7 +19,8 @@ const destinationSchema = new Schema({
 const flightSchema = new Schema({
   airline: {
     type: String,
-    enum: ['American', 'Southwest', 'United']
+    enum: ['American', 'Southwest', 'United'],
+    required: true
   },
   airport: {
     type: String,
@@ -28,12 +30,14 @@ const flightSchema = new Schema({
   flightNo: {
     type: Number,
     min: 10,
-    max: 9999
+    max: 9999,
+    required: true
   },
   departs: {
     type: Date,
+    required: true,
     default: function() {
-      return new Date(new Date().setFullYear(newDate().getFullYear() + 1));
+      return new Date(new Date().setFullYear(newDate().getFullYear() + 1) + 'T00:00');
     }
   },
   destinations: [destinationSchema]
